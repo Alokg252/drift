@@ -42,7 +42,12 @@ drift/
 │   │   │           └── UserService.java       # Business logic
 │   │   └── resources/
 │   │       ├── application.yaml               # Application configuration
-│   │       ├── templates/                     # Thymeleaf templates
+│   │       ├── static/                        # Static assets
+│   │       │   ├── css/
+│   │       │   │   └── styles.css             # Global stylesheet (responsive design)
+│   │       │   └── js/
+│   │       │       └── main.js                # JavaScript utilities & validations
+│   │       ├── templates/                     # Thymeleaf templates (HTML only)
 │   │       │   ├── index.html                 # User list dashboard
 │   │       │   ├── add-user.html              # Create user form
 │   │       │   ├── edit-user.html             # Edit user form
@@ -264,14 +269,21 @@ Web Browser             SOAP Client
                     User Model
 ```
 
-## 🎨 UI Preview
+## 🎨 UI Architecture
 
-The Thymeleaf frontend features:
+### File Organization
+- **HTML Templates** (`src/main/resources/templates/`) - Clean, semantic markup using Thymeleaf
+- **CSS Stylesheet** (`src/main/resources/static/css/styles.css`) - Global responsive styles (600+ lines)
+- **JavaScript** (`src/main/resources/static/js/main.js`) - Utilities and form validation
+
+### Frontend Features
 - 📊 Modern gradient design with purple theme
 - 📱 Responsive layout for mobile and desktop
-- ⚡ Smooth animations and transitions
+- ⚡ Smooth animations and transitions (fade-in messages, hover effects)
 - 🎯 Intuitive user management interface
-- 💬 Toast notifications for user feedback
+- 💬 Auto-closing toast notifications (5-second timeout)
+- ✅ Client-side form validation
+- 🔐 Confirmation dialogs for destructive actions
 
 ## 📝 Sample Data
 
@@ -284,6 +296,7 @@ The application comes with sample data:
 
 ## 🔧 Configuration
 
+### Application Settings
 Edit `src/main/resources/application.yaml`:
 
 ```yaml
@@ -296,6 +309,11 @@ spring:
     password: aksql
     driver-class-name: com.mysql.cj.jdbc.Driver
 ```
+
+### Static Resources
+- CSS files served from: `/css/` (maps to `src/main/resources/static/css/`)
+- JS files served from: `/js/` (maps to `src/main/resources/static/js/`)
+- Templates use Thymeleaf syntax: `th:href="@{/css/styles.css}"` and `th:src="@{/js/main.js}"`
 
 ## 🐛 Troubleshooting
 
@@ -314,6 +332,17 @@ server:
 ### WSDL not loading
 - Ensure Spring-WS is properly configured
 - Check `SoapConfig.java` for correct namespace and schema paths
+
+### CSS/JS not loading
+- Verify files exist in `src/main/resources/static/`
+- Check browser console for 404 errors
+- Restart application after adding static files
+- Clear browser cache if styles seem outdated
+
+### Form validation not working
+- Ensure `main.js` is loaded (check browser console)
+- Verify JavaScript is enabled in browser
+- Check for errors in browser Developer Tools console
 
 ## 📚 Resources
 
