@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: drift
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/javadb
+    username: root
+    password: aksql
+    driver-class-name: com.mysql.cj.jdbc.Driver
